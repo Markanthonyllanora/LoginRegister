@@ -1,0 +1,92 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+
+
+    <link rel="stylesheet" href="{% static 'accounts/css/style.css' %}">
+</head>
+<body>
+
+    <main class="auth-container">
+
+        <section class="auth-card">
+
+
+            <div class="welcome-panel">
+                <h2>Welcome Back!</h2>
+
+                <p>
+                    Already have an account?
+                    Sign in and continue where you left off.
+                </p>
+
+                <a href="{% url 'login_user' %}" class="outline-btn">
+                    Sign In
+                </a>
+            </div>
+
+
+            <div class="form-panel">
+                <h2>Sign Up</h2>
+
+                {% if messages %}
+                    {% for message in messages %}
+                        <p class="message">{{ message }}</p>
+                    {% endfor %}
+                {% endif %}
+
+                <form method="POST">
+                    {% csrf_token %}
+
+                    <div class="input-group">
+                        <label for="{{ form.username.id_for_label }}">
+                            Username
+                        </label>
+                        {{ form.username }}
+                        {{ form.username.errors }}
+                    </div>
+
+                    <div class="input-group">
+                        <label for="{{ form.email.id_for_label }}">
+                            Email Address
+                        </label>
+                        {{ form.email }}
+                        {{ form.email.errors }}
+                    </div>
+
+                    <div class="input-group">
+                        <label for="{{ form.password1.id_for_label }}">
+                            Password
+                        </label>
+                        {{ form.password1 }}
+                        {{ form.password1.errors }}
+                    </div>
+
+                    <div class="input-group">
+                        <label for="{{ form.password2.id_for_label }}">
+                            Confirm Password
+                        </label>
+                        {{ form.password2 }}
+                        {{ form.password2.errors }}
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        Sign Up
+                    </button>
+                </form>
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script src="{% static 'accounts/js/script.js' %}"></script>
+
+</body>
+</html>
